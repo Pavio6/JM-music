@@ -14,9 +14,9 @@ public class Knife4jConfiguration {
 
         return new OpenAPI().info(
                 new Info()
-                        .title("后台管理系统API")
-                        .version("1.0")
-                        .description("后台管理系统API"));
+                        .title("后台管理系统API")  // API标题
+                        .version("1.0") // 版本
+                        .description("音乐后台管理系统"));  // API描述
     }
 
 
@@ -25,10 +25,19 @@ public class Knife4jConfiguration {
 
         return GroupedOpenApi.builder().group("后台登录管理").  // 设置API组的名称
                 pathsToMatch( // 指定要包含在该组的路径
-                        "/admin/login/**",
-                        "/admin/user/**"
-                ).
+                "/admin/login/**",
+                "/admin/user/**"
+        ).
                 build();
     }
+    @Bean
+    public GroupedOpenApi songManagementAPI() {
 
+        return GroupedOpenApi.builder().group("后台音乐管理").  // 设置API组的名称
+                pathsToMatch( // 指定要包含在该组的路径
+                "/admin/singer/**",
+                "/admin/song/**"
+        ).
+                build();
+    }
 }

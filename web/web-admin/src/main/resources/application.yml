@@ -20,6 +20,10 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true # 开启自动驼峰映射
-
   mapper-locations: classpath:mapper/*Mapper.xml # mybatis映射文件的位置
-
+  global-config:
+    # 将删除操作改为更新操作
+    db-config:
+      logic-delete-field: isDeleted # 全局逻辑删除字段名
+      logic-delete-value: 1 # 逻辑已删除值
+      logic-not-delete-value: 0 # 逻辑未删除值

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlf.music.mapper.SongMapper">
+    <select id="getSongsByPage" resultType="com.jlf.music.vo.song.AdminSongResponseVo">
+        select song.id ,
+               song.title ,
+               singer.name as singer ,
+               album.title as album,
+               song.duration
+        from song
+                 join singer
+                      on song.singer_id = singer.id
+                 join album
+                      on song.album_id = album.id
+        where song.is_deleted = 0
+          and singer.is_deleted = 0
+          and album.is_deleted = 0
+    </select>
+</mapper>
