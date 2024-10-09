@@ -26,7 +26,6 @@ public class SingerController {
 
     /**
      * 删除歌手的同时将歌手关联的歌曲也全部删除
-     * TODO 完成歌曲表设计时 再完成删除操作
      */
     @Operation(summary = "根据歌手id删除歌手")
     @DeleteMapping("deleteById/{id}")

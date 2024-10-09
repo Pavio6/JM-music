@@ -1,7 +1,7 @@
 package com.jlf.music.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.jlf.music.enums.Gender;
+import com.jlf.music.enums.BaseGender;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 public class Singer extends BaseEntity{
     private String name;
     private String bio;
-    private Gender gender;
+    private BaseGender gender;
     private Date debutDate;
     private Date birthday;
     private String country;

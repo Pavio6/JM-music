@@ -2,7 +2,6 @@ package com.jlf.music.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jlf.music.common.result.Result;
-import com.jlf.music.entity.User;
 import com.jlf.music.service.UserService;
 import com.jlf.music.vo.user.UserListVo;
 import io.swagger.v3.oas.annotations.Operation;

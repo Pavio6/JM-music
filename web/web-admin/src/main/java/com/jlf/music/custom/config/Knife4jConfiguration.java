@@ -25,8 +25,7 @@ public class Knife4jConfiguration {
 
         return GroupedOpenApi.builder().group("后台登录管理").  // 设置API组的名称
                 pathsToMatch( // 指定要包含在该组的路径
-                "/admin/login/**",
-                "/admin/user/**"
+                "/admin/login/**"
         ).
                 build();
     }
@@ -40,4 +39,14 @@ public class Knife4jConfiguration {
         ).
                 build();
     }
+    @Bean
+    public GroupedOpenApi userManagementAPI() {
+
+        return GroupedOpenApi.builder().group("后台用户管理").  // 设置API组的名称
+                pathsToMatch( // 指定要包含在该组的路径
+                "/admin/user/**"
+        ).
+                build();
+    }
+
 }
