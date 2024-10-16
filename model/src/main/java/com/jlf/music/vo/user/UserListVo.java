@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.function.impl.ToDouble;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.jlf.music.config.CustomDateSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -34,6 +36,7 @@ public class UserListVo {
      * 创建时间
      */
     @TableField("create_time")
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createTime;
     /**
      * 活跃状态

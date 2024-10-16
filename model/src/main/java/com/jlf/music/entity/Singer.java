@@ -12,8 +12,10 @@ import java.util.Date;
 @TableName(value = "singer") // 指定数据库表名
 public class Singer extends BaseEntity{
     private String name;
+    @Schema(description = "简介")
     private String bio;
     private BaseGender gender;
+    @Schema(description = "出道日期")
     private Date debutDate;
     private Date birthday;
     private String country;

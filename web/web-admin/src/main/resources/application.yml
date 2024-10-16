@@ -27,7 +27,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true # 开启自动驼峰映射
   mapper-locations: classpath:mapper/*Mapper.xml # mybatis映射文件的位置
   global-config:
-    # 将删除操作改为更新操作
+    # 将删除操作改为更新操作(逻辑删除)
     db-config:
       logic-delete-field: isDeleted # 全局逻辑删除字段名
       logic-delete-value: 1 # 逻辑已删除值

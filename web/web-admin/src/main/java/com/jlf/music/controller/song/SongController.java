@@ -1,11 +1,10 @@
-package com.jlf.music.controller;
+package com.jlf.music.controller.song;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jlf.music.common.result.Result;
 import com.jlf.music.entity.Song;
 import com.jlf.music.service.SongService;
 import com.jlf.music.vo.song.AdminSongResponseVo;
-import com.jlf.music.vo.user.UserListVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

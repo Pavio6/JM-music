@@ -9,6 +9,7 @@ import com.jlf.music.mapper.UserMapper;
 import com.jlf.music.service.LoginService;
 import com.jlf.music.vo.login.CaptchaVo;
 import com.jlf.music.vo.login.LoginVo;
+import com.jlf.music.vo.login.SystemUserInfoVo;
 import com.wf.captcha.SpecCaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -42,11 +43,13 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public String login(LoginVo loginVo) {
+        // 验证码
         if (loginVo.getCaptchaCode() == null) {
             // TODO 所有异常需要设置自定义异常
             // throw new UserLoginException(ResultCodeEnum.ADMIN_CAPTCHA_CODE_NOT_FOUND);
             throw new IllegalArgumentException("验证码未提供");
         }
+        // 获取验证码值
         String code = stringRedisTemplate
                 .opsForValue()
                 .get(loginVo.getCaptchaKey());
@@ -57,12 +60,14 @@ public class LoginServiceImpl implements LoginService {
         if (!code.equals(loginVo.getCaptchaCode().toLowerCase())) {
             throw new IllegalArgumentException("验证码错误");
         }
+        // 获取用户信息 判断该用户是否存在
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userLambdaQueryWrapper.eq(User::getUsername, loginVo.getUsername());
         User user = userMapper.selectOne(userLambdaQueryWrapper);
         if (user == null) {
             throw new IllegalArgumentException("用户不存在");
         }
+
         if (user.getStatus() == BaseStatus.DISABLE) {
             throw new IllegalArgumentException("该用户已被禁用");
         }
@@ -70,6 +75,16 @@ public class LoginServiceImpl implements LoginService {
         if (!user.getPassword().equals(DigestUtils.md5DigestAsHex(loginVo.getPassword().getBytes()))) {
             throw new IllegalArgumentException("用户密码错误");
         }
+        // TODO 用户活动状态的改变
         return JwtUtil.createToken(user.getId(), user.getUsername());
+    }
+
+    @Override
+    public SystemUserInfoVo getLoginUserInfoById(Long userId) {
+        User user = userMapper.selectById(userId);
+        SystemUserInfoVo systemUserInfoVo = new SystemUserInfoVo();
+        systemUserInfoVo.setUsername(user.getUsername());
+        systemUserInfoVo.setProfilePicture(user.getProfilePicture());
+        return systemUserInfoVo;
     }
 }

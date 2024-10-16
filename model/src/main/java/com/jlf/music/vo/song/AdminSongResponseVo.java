@@ -1,6 +1,5 @@
 package com.jlf.music.vo.song;
 
-import com.jlf.music.entity.BaseEntity;
 import lombok.Data;
 
 import java.time.LocalTime;

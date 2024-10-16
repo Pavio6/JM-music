@@ -1,4 +1,4 @@
-package com.jlf.music.controller;
+package com.jlf.music.controller.singer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jlf.music.common.result.Result;

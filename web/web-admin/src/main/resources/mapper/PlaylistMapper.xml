@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlf.music.mapper.PlaylistMapper">
+    <select id="getPlaylistSongsByPage" resultType="com.jlf.music.vo.song.AdminSongResponseVo">
+        select s.id,
+               s.title,
+               singer.name as singer,
+               a.title     as album,
+               s.duration
+        from playlist_song ps
+                 join playlist p on ps.playlist_id = p.id
+                 join song s on ps.song_id = s.id
+                 join singer on s.singer_id = singer.id
+                 join album a on a.id = s.album_id
+        where ps.playlist_id = #{playlistId}
+          and ps.is_deleted = 0
+          and p.is_deleted = 0
+          and s.is_deleted = 0
+          and singer.is_deleted = 0
+
+    </select>
+</mapper>
