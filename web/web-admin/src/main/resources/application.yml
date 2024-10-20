@@ -19,7 +19,20 @@ spring:
       host: 192.168.236.101  # ip地址
       port: 6379  # 端口号
       database: 0
+  jackson: # 配置全局时间格式化
+    date-format: yyyy-MM-dd HH:mm:ss # 配置日期格式
+    time-zone: Asia/Yekaterinburg
+  servlet:
+    multipart:
+      max-file-size: 100MB # 单个文件上传的最大上限
+      max-request-size: 200MB # 整个请求体的最大上限
 
+minio:
+  host: http://192.168.236.101:9001
+  url: ${minio.host}/${minio.bucket}/
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket: public
 #用于打印框架生成的sql语句，便于调试
 mybatis-plus:
   configuration:
@@ -33,7 +46,7 @@ mybatis-plus:
       logic-delete-value: 1 # 逻辑已删除值
       logic-not-delete-value: 0 # 逻辑未删除值
 #jwt配置
-jwt:
-  token:
-    tokenExpiration: 120 #有效时间,单位分钟
-    tokenSignKey: headline123456  #当前程序签名秘钥 自定义
+#jwt:
+#  token:
+#    tokenExpiration: 120 #有效时间,单位分钟
+#    tokenSignKey: headline123456  #当前程序签名秘钥 自定义

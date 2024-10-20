@@ -6,14 +6,12 @@ import com.jlf.music.common.result.Result;
 import com.jlf.music.entity.User;
 import com.jlf.music.service.UserService;
 import com.jlf.music.vo.user.UserListVo;
+import com.jlf.music.vo.user.UserRegistrationVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Tag(name = "后台用户管理")
@@ -41,5 +39,24 @@ public class UserController {
         UserListVo userListVo = new UserListVo();
         BeanUtils.copyProperties(user, userListVo);
         return Result.ok(userListVo);
+    }
+    @Operation(summary = "用户名校验")
+    @GetMapping("register/check-username")
+    public Result checkUsername(@RequestParam String username) {
+        boolean available = userService.checkUsername(username);
+        String message = available ? "用户名可用" : "用户名已被使用";
+        return Result.ok(message);
+    }
+    @Operation(summary = "邮箱校验")
+    @GetMapping("register/check-email")
+    public Result checkEmail(@RequestParam String email) {
+        String message = userService.checkEmail(email);
+        return Result.ok(message);
+    }
+    @Operation(summary = "用户注册")
+    @PostMapping("register")
+    public Result userRegister(@RequestBody UserRegistrationVo userRegistrationVo) {
+        userService.userRegister(userRegistrationVo);
+        return Result.ok();
     }
 }

@@ -1,11 +1,11 @@
 package com.jlf.music.vo.user;
 
-import com.alibaba.fastjson2.function.impl.ToDouble;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.jlf.music.config.CustomDateSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jlf.music.enums.BaseIsActive;
+import com.jlf.music.enums.BaseIsDeleted;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -13,11 +13,8 @@ import java.util.Date;
 @Schema(description = "分页查询UserListVo")
 @Data
 public class UserListVo {
-    /**
-     * 用户ID，主键，自动增长
-     */
-    @TableId(type = IdType.AUTO)
-    private Long id;
+
+    private Integer id;
 
     /**
      * 用户名
@@ -29,23 +26,20 @@ public class UserListVo {
      */
     private String email;
     /**
-     * TODO
-     *    is_active和is_deleted 返回结果是active deleted
-     */
-    /**
      * 创建时间
      */
     @TableField("create_time")
-    @JsonSerialize(using = CustomDateSerializer.class)
+    // 局部处理反序列化
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**
      * 活跃状态
      */
     @TableField("is_active")
-    private boolean isActive;
+    private BaseIsActive isActive;
     /**
      * 删除
      */
     @TableField("is_deleted")
-    private boolean isDeleted;
+    private BaseIsDeleted isDeleted;
 }

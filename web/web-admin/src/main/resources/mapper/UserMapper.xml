@@ -8,9 +8,9 @@
         select id,
                username,
                email,
-               is_active as isActive,
+               is_active,
                create_time,
-               is_deleted as isDeleted
+               is_deleted
         from user
         ORDER BY id ASC
     </select>

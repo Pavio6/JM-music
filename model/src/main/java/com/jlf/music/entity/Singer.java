@@ -1,6 +1,7 @@
 package com.jlf.music.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jlf.music.enums.BaseGender;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -16,7 +17,10 @@ public class Singer extends BaseEntity{
     private String bio;
     private BaseGender gender;
     @Schema(description = "出道日期")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date debutDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+
     private Date birthday;
     private String country;
     private String imagePath;

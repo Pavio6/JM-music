@@ -8,9 +8,8 @@ public enum BaseIsPrivate implements BaseEnum{
     PUBLIC(0, "公开"),
     PRIVATE(1, "私有");
     @EnumValue
-    @JsonValue
     private Integer code;
-
+    @JsonValue
     private String name;
 
     BaseIsPrivate(Integer code, String name) {

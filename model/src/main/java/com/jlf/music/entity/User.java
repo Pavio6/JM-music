@@ -1,12 +1,13 @@
 package com.jlf.music.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.jlf.music.enums.BaseIsActive;
 import com.jlf.music.enums.BaseStatus;
 import com.jlf.music.enums.BaseGender;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Schema(description = "用户表")
@@ -17,9 +18,9 @@ public class User extends BaseEntity{
     private String email;
     private BaseGender gender;
     private BaseStatus status;
-    private Date birthdate;
+    private LocalDate birthday;
     private String bio;
     private String profilePicture;
-    private int isActive;
+    private BaseIsActive isActive;
 
 }

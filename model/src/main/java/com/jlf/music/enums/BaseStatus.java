@@ -18,9 +18,8 @@ public enum BaseStatus implements BaseEnum {
 
 
     @EnumValue
-    @JsonValue
     private Integer code;
-
+    @JsonValue
     private String name;
 
     BaseStatus(Integer code, String name) {

@@ -30,6 +30,17 @@ public class Knife4jConfiguration {
         ).
                 build();
     }
+
+    @Bean
+    public GroupedOpenApi singerManagementAPI() {
+
+        return GroupedOpenApi.builder().group("后台歌手管理").  // 设置API组的名称
+                pathsToMatch( // 指定要包含在该组的路径
+                "/admin/singer/**"
+        ).
+                build();
+    }
+
     @Bean
     public GroupedOpenApi songManagementAPI() {
 
@@ -40,6 +51,7 @@ public class Knife4jConfiguration {
         ).
                 build();
     }
+
     @Bean
     public GroupedOpenApi userManagementAPI() {
 
@@ -49,11 +61,28 @@ public class Knife4jConfiguration {
         ).
                 build();
     }
+
     @Bean
     public GroupedOpenApi playlistManagementAPI() {
         return GroupedOpenApi.builder().group("后台歌单管理").
                 pathsToMatch(
                         "/admin/playlist/**"
+                ).pathsToExclude( // 排除的路径
+                        "/admin/playlist/comment/**"
+                ).build();
+    }
+    @Bean
+    public GroupedOpenApi playlistCommentManagementAPI() {
+        return GroupedOpenApi.builder().group("后台歌单评论管理").
+                pathsToMatch(
+                        "/admin/playlist/comment/**"
+                ).build();
+    }
+    @Bean
+    public GroupedOpenApi frontUserLikeManagementAPI() {
+        return GroupedOpenApi.builder().group("前台用户喜欢列表管理").
+                pathsToMatch(
+                        "/user/like/**"
                 ).
                 build();
     }

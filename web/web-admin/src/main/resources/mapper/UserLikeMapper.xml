@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlf.music.mapper.UserLikeMapper">
+    <select id="getLikedSongs" resultType="com.jlf.music.vo.song.UserLikedSongVo">
+        select s.title,
+               s.image_path,
+               sg.name as singer_name,
+               s.duration,
+               a.title as album_name
+        from user_likes ul
+                 join song s on ul.song_id = s.id
+                 join singer sg on s.singer_id = sg.id
+                 join album a on s.album_id = a.id
+        where ul.user_id = #{userId} and s.is_deleted = 0
+    </select>
+</mapper>

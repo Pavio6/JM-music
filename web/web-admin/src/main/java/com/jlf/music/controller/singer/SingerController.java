@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jlf.music.common.result.Result;
 import com.jlf.music.entity.Singer;
 import com.jlf.music.service.SingerService;
+import com.jlf.music.vo.singer.AdminSingerResponseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,17 @@ public class SingerController {
     }
     @Operation(summary = "分页查询歌手列表")
     @GetMapping("pageSinger")
-    public Result<IPage<Singer>> getSingersByPage(
+    public Result<IPage<AdminSingerResponseVo>> getSingersByPage(
             @RequestParam(defaultValue = "1") int currentPage, // 页码
             @RequestParam(defaultValue = "10") int pageSize) {
-        IPage<Singer> result =  singerService.getSingersByPage(currentPage, pageSize);
+        IPage<AdminSingerResponseVo> result =  singerService.getSingersByPage(currentPage, pageSize);
         return Result.ok(result);
     }
 
+    @Operation(summary = "查询歌手详细信息")
+    @GetMapping("getSingerById")
+    public Result<Singer> getSingerById(@RequestParam Integer id) {
+
+        return Result.ok(singerService.getById(id));
+    }
 }

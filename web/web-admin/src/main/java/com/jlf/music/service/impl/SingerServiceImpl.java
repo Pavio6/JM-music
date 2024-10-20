@@ -9,6 +9,7 @@ import com.jlf.music.entity.Song;
 import com.jlf.music.mapper.SingerMapper;
 import com.jlf.music.mapper.SongMapper;
 import com.jlf.music.service.SingerService;
+import com.jlf.music.vo.singer.AdminSingerResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,10 @@ public class SingerServiceImpl extends ServiceImpl<SingerMapper, Singer>
     @Autowired
     private SongMapper songMapper;
     @Override
-    public IPage<Singer> getSingersByPage(int currentPage, int pageSize) {
+    public IPage<AdminSingerResponseVo> getSingersByPage(int currentPage, int pageSize) {
+        Page<AdminSingerResponseVo> page = new Page<>(currentPage, pageSize);
         // 使用BaseMapper提供的分页查询方法
-        return singerMapper.selectPage(new Page<Singer>(currentPage, pageSize), null);
+        return singerMapper.selectSingersByPage(page);
     }
 
     @Override
