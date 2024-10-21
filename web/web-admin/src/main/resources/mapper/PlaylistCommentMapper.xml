@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jlf.music.mapper.PlaylistCommentMapper">
+    <select id="getPlaylistCommentByPlaylistId"
+            resultType="com.jlf.music.vo.playlist.PlaylistCommentResponseVo">
+        select pc.id,
+               pc.parent_comment_id,
+               pc.create_time,
+               u.username,
+               u.profile_picture,
+               pc.content
+        from playlist_comment pc
+                 join user u on u.id = pc.user_id
+        where pc.playlist_id = #{PlaylistId} and pc.is_deleted = 0
+    </select>
+</mapper>

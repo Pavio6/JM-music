@@ -1,24 +1,27 @@
 package com.jlf.music.controller.comment;
 
 import com.jlf.music.common.result.Result;
-import com.jlf.music.entity.Comment;
-import com.jlf.music.service.CommentService;
+import com.jlf.music.entity.PlaylistComment;
+import com.jlf.music.service.PlaylistCommentService;
+import com.jlf.music.vo.playlist.PlaylistCommentResponseVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Tag(name = "后台歌单评论管理")
 @RequestMapping("/admin/playlist/comment")
-public class CommentController {
+public class PlaylistCommentController {
 
     @Autowired
-    private CommentService commentService;
+    private PlaylistCommentService playlistCommentService;
     @Operation(summary = "用户对歌单评论")
     @PostMapping("addCommentToPlaylist")
-    public Result addCommentToPlaylist(@RequestBody Comment comment) {
-        commentService.save(comment);
+    public Result addCommentToPlaylist(@RequestBody PlaylistComment playlistComment) {
+        playlistCommentService.save(playlistComment);
         return Result.ok();
     }
     /**
@@ -29,10 +32,14 @@ public class CommentController {
     @Operation(summary = "删除歌单评论")
     @DeleteMapping("deleteCommentFromPlaylist/{commentId}")
     public Result deleteCommentFromPlaylist(@PathVariable Integer commentId) {
-        commentService.deleteCommentById(commentId);
+        playlistCommentService.deleteCommentById(commentId);
 
         return Result.ok();
     }
-
-
+    @Operation(summary = "查询歌单评论")
+    @GetMapping("getAllPlaylistComment/{playlistId}")
+    public Result<List<PlaylistCommentResponseVo>> getPlaylistCommentByPlaylistId(@PathVariable Integer playlistId) {
+        List<PlaylistCommentResponseVo> commentList = playlistCommentService.getPlaylistCommentByPlaylistId(playlistId);
+        return Result.ok(commentList);
+    }
 }

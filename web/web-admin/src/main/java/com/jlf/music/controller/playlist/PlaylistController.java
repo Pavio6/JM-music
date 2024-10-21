@@ -3,7 +3,6 @@ package com.jlf.music.controller.playlist;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jlf.music.common.result.Result;
-import com.jlf.music.entity.Comment;
 import com.jlf.music.entity.Playlist;
 import com.jlf.music.service.PlaylistService;
 import com.jlf.music.vo.song.AdminSongResponseVo;
